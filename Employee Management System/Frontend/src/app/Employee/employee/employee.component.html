@@ -1,0 +1,82 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h1 class="box1">Employee Management System</h1>
+        <div class="d-flex">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add
+                Employee</button>
+        </div>
+    </div>
+</nav>
+
+<div style="overflow-x: auto;">
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Company</th>
+                <th scope="col">Designation</th>
+                <th scope="col">CTC</th>
+                <th scope="col">Location</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of employeedata">
+                <td>{{row.employeeName}}</td>
+                <td>{{row.company}}</td>
+                <td>{{row.designation}}</td>
+                <td>{{row.ctc}}</td>
+                <td>{{row.location}}</td>
+                <td>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        class="btn btn-info" (click)="onEdit(row)">Edit</button>
+                    <button class="btn btn-danger mx-3" (click)="delEmployee(row)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Employee Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form [formGroup]="Addform">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Employee Name</label>
+                        <input type="text" formControlName="employeeName" class="form-control" id="exampleInputEmail1" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Company</label>
+                        <input type="text" formControlName="company" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Designation</label>
+                        <input type="text" formControlName="designation" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">CTC</label>
+                        <input type="text" formControlName="ctc" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Location</label>
+                        <input type="text" formControlName="location" class="form-control"
+                            id="exampleInputPassword1">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="postEmployeeDetails()" >Add</button>
+                <button type="button" class="btn btn-primary" (click)="updateEmployeeDetails()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
